@@ -28,8 +28,6 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-import six
-
 from pyudev.device import Device
 
 
@@ -196,7 +194,7 @@ class QUDevMonitorObserverGenerator(object):
                 make_init(qobject, socket_notifier),
                 #: emitted upon arbitrary device events
                 str("deviceEvent"):
-                signal(six.text_type, Device),
+                signal(str, Device),
                 #: emitted if a device was added
                 str("deviceAdded"):
                 signal(Device),

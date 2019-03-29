@@ -30,8 +30,6 @@ from __future__ import unicode_literals
 
 from functools import wraps
 
-import six
-
 import pytest
 
 from hypothesis.core import FailedHealthCheck
@@ -42,7 +40,7 @@ def is_unicode_string(value):
     Return ``True``, if ``value`` is of a real unicode string type
     (``unicode`` in python 2, ``str`` in python 3), ``False`` otherwise.
     """
-    return isinstance(value, unicode if six.PY2 else str)
+    return isinstance(value, str)
 
 
 def failed_health_check_wrapper(func):
@@ -58,13 +56,12 @@ def failed_health_check_wrapper(func):
         try:
             func(*args)
         except FailedHealthCheck:
-            func_code = six.get_function_code(func)
             pytest.skip(
                'failed health check for %s() (%s: %s)' % \
                (
-                  func_code.co_name,
-                  func_code.co_filename,
-                  func_code.co_firstlineno
+                  func.func_code.co_name,
+                  func.func_code.co_filename,
+                  func.func_code.co_firstlineno
                )
             )
 

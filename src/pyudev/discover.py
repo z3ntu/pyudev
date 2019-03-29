@@ -32,7 +32,6 @@ import abc
 import functools
 import os
 import re
-import six
 
 from pyudev._errors import DeviceNotFoundError
 
@@ -59,11 +58,11 @@ def wrap_exception(func):
     return the_func
 
 
-@six.add_metaclass(abc.ABCMeta)
 class Hypothesis(object):
     """
     Represents a hypothesis about the meaning of the device identifier.
     """
+    __metaclass__ = abc.ABCMeta
 
     @classmethod
     @abc.abstractmethod
