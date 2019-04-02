@@ -59,9 +59,9 @@ def failed_health_check_wrapper(func):
             pytest.skip(
                'failed health check for %s() (%s: %s)' % \
                (
-                  func.func_code.co_name,
-                  func.func_code.co_filename,
-                  func.func_code.co_firstlineno
+                  func.__code__.co_name,
+                  func.__code__.co_filename,
+                  func.__code__.co_firstlineno
                )
             )
 
